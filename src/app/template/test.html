@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    
+    <div id="d" style="color:rgba(21, 24, 218, 0.41)" someAttr="itany">aaaa</div>
+
+    <table>
+        <tr>
+            <td id="td" colspan="2"></td>
+        </tr>
+    </table>
+
+
+
+
+    <script>
+        
+        var div = document.getElementById("d");
+        // 取的是dom对象的 dom 属性
+        var value = div.someAttr;
+        console.log(value);//=>undefined
+        // html属性 ==》 html标签上的属性
+        var value2 = div.getAttribute("someAttr");
+        console.log(value2);//=> itany
+
+        var style = div.style;
+        console.log(style.color);
+
+        var td = document.getElementById("td");
+        console.log(".colspan =>" ,td.colspan);//==> undefined 
+        console.log("getAttr=>",td.getAttribute("colspan"));//==> 2
+
+
+        function a ()
+        {
+            return false;
+        }
+
+        function b(){
+            console.log('bbb');
+            return true;
+        }
+        //短路与
+        var flag = a() && b();
+
+    </script>
+
+</body>
+</html>
