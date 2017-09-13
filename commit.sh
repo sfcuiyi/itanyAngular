@@ -1,3 +1,3 @@
 git add --all
 git commit -m 'ddd'
-git push -u ts master
+git push -u ng master
