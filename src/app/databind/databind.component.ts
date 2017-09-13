@@ -11,6 +11,6 @@ export class DatabindComponent  {
   constructor()
   {
       setTimeout(()=>this.name="哈哈",3000);
-
+//
   }
 }
