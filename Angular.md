@@ -621,6 +621,100 @@ username:string="chw0564";
 <input type="text" (input)="doOnInput($event)">
 ```
 
+**特殊属性：disabled**
+
+```html
+<h1>disabled属性</h1>
+<button>普通按钮</button>
+<button disabled>按钮1</button>
+<button disabled="false">按钮2</button>
+<button disabled="true">按钮3</button>
+<button disabled=false >按钮4</button>
+<br>
+<button disabled="{{flag}}" >按钮5</button>
+<!-- 只有下面这种添加方式才能实现禁用和启用的切换 -->
+<button [disabled]="flag" >按钮6</button>
+<button (click)="this.flag = !this.flag">toggle</button>
+```
+
+#### 5、HTML属性的绑定
+
+当且仅当没有对应的DOM属性的时候，才考虑使用HTML属性绑定
+
+##### 5-1、基本HTML属性
+
+```html
+<h1>HTML属性绑定</h1>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tr>
+        <td [attr.colspan]="colspan">xxxxxx1</td>
+        <td>xxxxxx2</td>
+    </tr>
+    <tr>
+        <td>xxxxxx3</td>
+        <td>xxxxxx3</td>
+        <td>xxxxxx3</td>
+    </tr>
+    <tr>
+        <td>xxxxxx4</td>
+        <td>xxxxxx4</td>
+        <td>xxxxxx4</td>
+    </tr>
+</table>
+<button (click)="changeCol(1)" >+</button>
+<button (click)="changeCol(-1)" >-</button>
+```
+
+```typescript
+colspan:number=3;
+changeCol(n:number)
+{
+  this.colspan += n;
+}
+```
+
+##### 5-2、css类的绑定
+
+```html
+<h1>css类class的绑定</h1>
+<div class="red green fs40">this is a div</div>
+<div [class]="divCls">div2.....</div>
+<!-- [class.样式名]=“布尔值（布尔类型表达式1>2） 当表达式为true的时候，使用该样式，否则不使用” -->
+<div class="red green" [class.fs40]="isLarger">div3....</div>
+<button (click)="this.isLarger = !this.isLarger">toggleLarger</button>
+<!-- [ngClass]是固定写法，ngCls是一个json对象，
+    key是样式名字，value是true或者false
+    如果为true，则使用对应的样式
+-->
+<div [ngClass]="ngCls">div4.....</div>
+<button (click)="ngCls.red = !ngCls.red">red</button>
+<button (click)="ngCls.green = !ngCls.green">green</button>
+<button (click)="ngCls.fs40 = !ngCls.fs40">fs40</button>
+```
+
+```typescript
+ divCls:string = "red green fs40";
+
+  ngCls:any = {
+    "red":true,
+    "green":false,
+    "fs40":true
+  }
+```
+
+```css
+.red{
+    background-color: red;
+}
+.green{
+    color:green;
+}
+.fs40{
+    font-size: 20px;
+    margin-top: 10px;
+}
+```
+
 
 
 

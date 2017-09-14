@@ -56,4 +56,18 @@ export class DatabindComponent  {
     console.log(e.target.value);
   }
 
+  colspan:number=3;
+  changeCol(n:number)
+  {
+    this.colspan += n;
+  }
+
+
+  divCls:string = "red green fs40";
+
+  ngCls:any = {
+    "red":true,
+    "green":false,
+    "fs40":true
+  }
 }
