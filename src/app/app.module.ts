@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { TemplateComponent } from './template/template.component';
 import { DatabindComponent } from './databind/databind.component';
 import { DirComponent } from './dir/dir.component';
+import { DirexeComponent } from './direxe/direxe.component';
 
 @NgModule({
     
@@ -14,7 +15,8 @@ import { DirComponent } from './dir/dir.component';
     AppComponent,
     TemplateComponent,
     DatabindComponent,
-    DirComponent
+    DirComponent,
+    DirexeComponent
   ],
   imports: [
     BrowserModule,

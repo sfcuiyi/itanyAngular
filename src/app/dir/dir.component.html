@@ -32,9 +32,33 @@
  -->
 <ul>
   <li *ngFor=" let item of addrs ; index as i ; first as isFirst ; last as isLast ; even as isEven ; odd as isOdd"
-  
+    [class.bigger]="isFirst || isLast"
+    [class.red]="isEven"
+    [class.blue]="isOdd"
   >
     第{{i}}个城市是：{{item}}--{{isFirst}}---{{isLast}}--{{isEven}}---{{isOdd}}
   </li>
 </ul>
 
+
+<ul>
+    <li template="ngFor let item of addrs ; index as i ; first as isFirst ; last as isLast ; even as isEven ; odd as isOdd"
+      [class.bigger]="isFirst || isLast"
+      [class.red]="isEven"
+      [class.blue]="isOdd"
+    >
+      第{{i}}个城市是：{{item}}--{{isFirst}}---{{isLast}}--{{isEven}}---{{isOdd}}
+    </li>
+</ul>
+<hr>
+
+<ul>
+  <li *ngFor="let u of users">
+    用户名：{{u.username}} 密码：{{u.password}}
+  </li>
+</ul>
+<br>
+<span>ngFor也属于数据绑定</span>
+<br>
+<input type="text" placeholder="城市" [(ngModel)]="city" />
+<button (click)="addCity()">add</button>

@@ -821,6 +821,75 @@ directive，指令是Angular对html标签以及标签属性进行的扩展
 
 作用：对指令所在标签进行循环
 
+```typescript
+addrs:Array<string> = "南京,徐州,上海,苏州,无锡,常州,北京,<a href='#'>aa</a>".split(",");
+
+  users:Array<any> = [
+    {"username":"zhangsan1","password":"1231"},
+    {"username":"zhangsan2","password":"1232"},
+    {"username":"zhangsan3","password":"1233"},
+    {"username":"zhangsan4","password":"1234"},    
+    {"username":"zhangsan5","password":"1235"},
+  ];
+
+  city:string;
+  addCity(){
+    this.addrs.push(this.city);
+  }
+```
+
+```html
+<h2>ngFor</h2>
+<ul>
+  <!-- 
+    let  变量名  of  要循环的内容 [ | index as 变量名;first as 变量名;last as 变量名;even as 变量名;odd as 变量名 ]
+    index表示下标，其余的boolean类型
+    变量名对应每次循环的元素，可以直接使用插值表达式获取值
+  -->
+  <li *ngFor="let item of addrs" >{{item}}</li>
+</ul>
+
+<hr>
+<!-- 
+  第0条和最后一条 字体变大
+  偶数条  红色
+  奇数条  蓝色
+
+ -->
+<ul>
+  <li *ngFor=" let item of addrs ; index as i ; first as isFirst ; last as isLast ; even as isEven ; odd as isOdd"
+    [class.bigger]="isFirst || isLast"
+    [class.red]="isEven"
+    [class.blue]="isOdd"
+  >
+    第{{i}}个城市是：{{item}}--{{isFirst}}---{{isLast}}--{{isEven}}---{{isOdd}}
+  </li>
+</ul>
+
+
+<ul>
+    <li template="ngFor let item of addrs ; index as i ; first as isFirst ; last as isLast ; even as isEven ; odd as isOdd"
+      [class.bigger]="isFirst || isLast"
+      [class.red]="isEven"
+      [class.blue]="isOdd"
+    >
+      第{{i}}个城市是：{{item}}--{{isFirst}}---{{isLast}}--{{isEven}}---{{isOdd}}
+    </li>
+</ul>
+<hr>
+
+<ul>
+  <li *ngFor="let u of users">
+    用户名：{{u.username}} 密码：{{u.password}}
+  </li>
+</ul>
+<br>
+<span>ngFor也属于数据绑定</span>
+<br>
+<input type="text" placeholder="城市" [(ngModel)]="city" />
+<button (click)="addCity()">add</button>
+```
+
 
 
 
