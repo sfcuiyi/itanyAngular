@@ -554,7 +554,72 @@ export class DatabindComponent  {
 
 #### 4、DOM属性的绑定
 
+```typescript
+username:string="chw0564";
+  imgUrl:string;
+  nullUrl:string;
 
+
+  setUsername()
+  {
+    this.username = "random:" + Math.random();
+  }
+
+  getUsername()
+  {
+    var input = document.getElementById("input");
+    console.log("html=>", input.getAttribute("value"));
+    console.log(this.username);
+  }
+
+  doOnInput(e)
+  {
+    console.log(e.target.value);
+  }
+```
+
+
+
+```html
+<hr>
+<h3>获取组件（ts类）中的属性</h3>
+<h4>{{username}}</h4>
+<!-- 
+    =右边有{}，左边就没东西
+    =左边有[] ，右边就没东西
+-->
+<h4 id="{{username}}">方式1</h4>
+<h4 [id]="username">方式2</h4>
+<span>建议使用方式2</span>
+<a href="{{nullUrl}}">方式1-插值表达式</a>
+<a [href]="nullUrl">方式2-[属性]</a>
+<h3>
+    <span>注意：凡是能导致网络请求发送的时候，如果地址是异步加载，使用方式1</span>
+</h3>
+<a href="{{imgUrl}}">点击1</a>
+<a [href]="imgUrl">点击2</a>
+
+<img src="{{imgUrl}}" alt="">
+<!--
+    以下写法存在问题：
+        会多发送一次请求    
+-->
+<img [src]="imgUrl" alt="">
+<hr>
+<input id="input" type="text" [value]="username" />
+<button (click)="setUsername()">set username</button>
+<button (click)="getUsername()">get username</button>
+<span>
+    <ul>
+        <li>单向数据绑定</li>
+        <li>组价中的属性值发生更改，会影响DOM</li>
+        <li>DOM中值发生更改 不影响组件中的属性</li>
+        <li>改的是DOM属性，不是HTML属性</li>
+    </ul>
+</span>
+
+<input type="text" (input)="doOnInput($event)">
+```
 
 
 
