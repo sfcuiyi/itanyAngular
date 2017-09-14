@@ -505,6 +505,55 @@ export class DatabindComponent  {
 
 
 
+```typescript
+<p>事件绑定</p>
+<button (click)="handleClick($event)">按钮1</button>
+<button (click)="handleClick($event)">按钮2</button>
+<p>也可以在插值表达式中调用方法</p>
+{{ handleClick() }}
+
+<div *ngIf="flag">aaaa</div>
+
+<button (click)="toggle()">切换</button>
+<button (click)="this.flag = !this.flag">切换2</button>
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-databind',
+  templateUrl: './databind.component.html',
+  styleUrls: ['./databind.component.css']
+})
+export class DatabindComponent  {
+
+  handleClick(e)
+  {
+    // e 就是JavaScript中的事件对象
+    // target 属性  就是  事件源 ==》 DOM对象
+    console.log('按钮被点击',e?e.target.innerHTML:"");
+    return "itany";
+  }
+
+  flag:boolean = true;
+
+  toggle(){
+    // if(this.flag)
+    // {
+    //   this.flag = false;
+    // }else{
+    //   this.flag = true;
+    // }
+    this.flag = !this.flag;
+  }
+
+}
+
+```
+
+#### 4、DOM属性的绑定
+
 
 
 

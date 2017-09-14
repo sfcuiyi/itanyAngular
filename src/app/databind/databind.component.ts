@@ -11,10 +11,10 @@ export class DatabindComponent  {
   constructor()
   {
       setTimeout(()=>this.name="哈哈",3000);
-//
+      setTimeout(()=>this.imgUrl = "http://placehold.it/40x40",3000);
   }
 
-  handleClick(e)
+  handleClickBtn(e)
   {
     // e 就是JavaScript中的事件对象
     // target 属性  就是  事件源 ==》 DOM对象
@@ -31,8 +31,29 @@ export class DatabindComponent  {
     // }else{
     //   this.flag = true;
     // }
-
     this.flag = !this.flag;
+  }
+
+  username:string="chw0564";
+  imgUrl:string;
+  nullUrl:string;
+
+
+  setUsername()
+  {
+    this.username = "random:" + Math.random();
+  }
+
+  getUsername()
+  {
+    var input = document.getElementById("input");
+    console.log("html=>", input.getAttribute("value"));
+    console.log(this.username);
+  }
+
+  doOnInput(e)
+  {
+    console.log(e.target.value);
   }
 
 }
