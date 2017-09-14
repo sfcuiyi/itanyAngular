@@ -1,0 +1,40 @@
+<h1>指令</h1>
+<h2>ngIf</h2>
+<div *ngIf="isShow">aaaaa</div>
+<button (click)="this.isShow = !this.isShow">toggle</button>
+
+<h2>ngswitch-ngswitchcase-ngswitchdefault</h2>
+
+<input type="text" [(ngModel)]="name" /> {{name}}
+<ul [ngSwitch]="name">
+  <li *ngSwitchCase="'zhangsan'" >张三</li>
+  <li *ngSwitchCase="'lisi'" >李四</li>
+  <li *ngSwitchCase="xiedong" >老司机</li>
+  <li *ngSwitchDefault>未知</li>
+</ul>
+
+<h2>ngFor</h2>
+<ul>
+  <!-- 
+    let  变量名  of  要循环的内容 [ | index as 变量名;first as 变量名;last as 变量名;even as 变量名;odd as 变量名 ]
+    index表示下标，其余的boolean类型
+    变量名对应每次循环的元素，可以直接使用插值表达式获取值
+  -->
+  <li *ngFor="let item of addrs" >{{item}}</li>
+</ul>
+
+<hr>
+<!-- 
+  第0条和最后一条 字体变大
+  偶数条  红色
+  奇数条  蓝色
+
+ -->
+<ul>
+  <li *ngFor=" let item of addrs ; index as i ; first as isFirst ; last as isLast ; even as isEven ; odd as isOdd"
+  
+  >
+    第{{i}}个城市是：{{item}}--{{isFirst}}---{{isLast}}--{{isEven}}---{{isOdd}}
+  </li>
+</ul>
+

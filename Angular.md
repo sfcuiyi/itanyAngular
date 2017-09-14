@@ -774,7 +774,52 @@ export class AppModule { }
 
 
 
+### 十一、指令
 
+directive，指令是Angular对html标签以及标签属性进行的扩展
+
+几乎所有的常用指令都是以下格式
+
+```html
+<xxx *ngYyyy="" ></xxx>
+```
+
+下面将的指令，除非特别说明，否则指令前都带有 *
+
+#### 1、ngIf
+
+语法
+
+```html
+<!--expression 是boolean类型值或者boolean类型表达式-->
+<xx *ngIf="expression"></xx>
+```
+
+作用
+
+如果表达式为真，则显示指令所在标签，否则不显示
+
+
+
+#### 2、ngSwitch系列
+
+```html
+<h2>ngswitch-ngswitchcase-ngswitchdefault</h2>
+
+<input type="text" [(ngModel)]="name" /> {{name}}
+<ul [ngSwitch]="name">
+  <li *ngSwitchCase="'zhangsan'" >张三</li>
+  <li *ngSwitchCase="'lisi'" >李四</li>
+  <li *ngSwitchCase="xiedong" >老司机</li>
+  <li *ngSwitchDefault>未知</li>
+</ul>
+```
+
+
+
+#### 3、ngFor
+
+作用：对指令所在标签进行循环
 
 
 

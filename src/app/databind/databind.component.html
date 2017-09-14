@@ -132,14 +132,14 @@
 
 
 <h1>简易计算器</h1>
-num1:<input type="text"> <br>
-num2:<input type="text"><br>
-<button>+</button>
-<button>-</button>
-<button>x</button>
-<button>/</button>
+num1:<input type="number" [(ngModel)]="x"> <br>
+num2:<input type="number" [(ngModel)]="y"><br>
+<button (click)="this.result = this.x + this.y" >+</button>
+<button (click)="this.result = this.x - this.y" >-</button>
+<button (click)="this.result = this.x * this.y" >x</button>
+<button (click)="this.result = this.x / this.y" >/</button>
 <br>
-结果:
+结果:{{result}}
 
 <br>
 <br>
