@@ -3,7 +3,7 @@
 ## 主讲：崔译
 
 ### 一、Angular简介
- 
+
 用于解决、实现一个  SPA (Single Page Application 单页应用程序)
 
 简化对DOM的操作，动态的更新DOM对象 
@@ -461,9 +461,47 @@ export class TemplateComponent implements OnInit {
 {{xxx}}
 ```
 
+```typescript
+<h1>插值表达式</h1>
+
+<p>普通文本</p>
+<p> {{ '这是普通的字符串文本' }} </p>
+<p>进行计算</p>
+<span>支持常用表达式,不支持位运算</span>
+<p>{{ 2+3*2 }}</p>
+<p>{{1 > 3}}</p>
+<p>数据绑定</p>
+<p>name : {{name}}</p>
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-databind',
+  templateUrl: './databind.component.html',
+  styleUrls: ['./databind.component.css']
+})
+export class DatabindComponent  {
+  name:string = "老王";
+
+  constructor()
+  {
+      setTimeout(()=>this.name="哈哈",3000);
+//
+  }
+}
+
+```
 
 
 
+#### 3、事件绑定
+
+```html
+<button (事件名/类似于jquery bind方法的事件名)="类中的方法名()" >xxxx</button>
+<button (事件名/类似于jquery bind方法的事件名)="语句" >xxxx</button>
+```
 
 
 

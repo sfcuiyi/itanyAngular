@@ -8,3 +8,16 @@
 <p>{{1 > 3}}</p>
 <p>数据绑定</p>
 <p>name : {{name}}</p>
+
+<p>事件绑定</p>
+<button (click)="handleClick($event)">按钮1</button>
+<button (click)="handleClick($event)">按钮2</button>
+<p>也可以在插值表达式中调用方法</p>
+{{ handleClick() }}
+
+<div *ngIf="flag">aaaa</div>
+
+<button (click)="toggle()">切换</button>
+<button (click)="this.flag = !this.flag">切换2</button>
+
+
