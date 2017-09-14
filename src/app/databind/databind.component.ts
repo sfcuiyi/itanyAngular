@@ -70,4 +70,17 @@ export class DatabindComponent  {
     "green":false,
     "fs40":true
   }
+
+  ngStyle:any = {
+    "background-color":"#ccc",
+    "color":"#fff"
+  }
+
+  // msg:string;
+
+  // changeMsg(e){
+  //   this.msg = e.target.value;
+  // }
+
+  newMsg :string = "origin";
 }

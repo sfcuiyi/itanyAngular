@@ -717,7 +717,60 @@ changeCol(n:number)
 
 
 
+##### 5-3、style绑定
 
+```html
+<h1>style属性的绑定</h1>
+<div style="color:red" >div1......</div>
+<!-- 
+    语法：
+        [style.样式名.单位] 单位可以省略
+ -->
+<div [style.color]="ngCls.red ? 'red' : 'blue'" >div2......</div>
+<div [style.font-size]="ngCls.fs40?'40px':'20px'">div3....</div>
+<div [style.font-size.px]="ngCls.fs40?'40':'20'">div4....</div>
+<!-- 
+    [ngStyle]="组件中的属性" 属性是json key是style的属性名 value是style的属性值
+ -->
+<div [ngStyle]="ngStyle">div4....</div>
+```
+
+```typescript
+ ngStyle:any = {
+    "background-color":"#ccc",
+    "color":"#fff"
+  }
+```
+
+#### 6、数据的双向绑定
+
+所谓的数据双向绑定指的是**不论视图（View，html模板）或者  模型(model 数据模型 组件中的属性) 中的哪一方发生了更改，另一方都会随着改变**
+
+**Angular4 不再默认提供双向数据绑定功能，将双向数据绑定放到了@angular/forms模块中，在使用双向数据绑定之前，首先要在app.module.ts中导入FormsModule模块,同时在import配置项中添加该模块**
+
+**app.modul.ts**
+
+```typescript
+import {FormsModule} from '@angular/forms';
+@NgModule({
+    
+  declarations: [
+  ],
+  imports: [
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+```
+
+```html
+<!-- banana in a box [()] -->
+<input type="text"  [(ngModel)]="newMsg">
+<h5>用户输入的内容是:{{newMsg}}</h5>
+```
 
 
 

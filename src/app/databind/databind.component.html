@@ -108,6 +108,27 @@
 <button (click)="ngCls.fs40 = !ngCls.fs40">fs40</button>
 
 
+<h1>style属性的绑定</h1>
+<div style="color:red" >div1......</div>
+<!-- 
+    语法：
+        [style.样式名.单位] 单位可以省略
+ -->
+<div [style.color]="ngCls.red ? 'red' : 'blue'" >div2......</div>
+<div [style.font-size]="ngCls.fs40?'40px':'20px'">div3....</div>
+<div [style.font-size.px]="ngCls.fs40?'40':'20'">div4....</div>
+<!-- 
+    [ngStyle]="组件中的属性" 属性是json key是style的属性名 value是style的属性值
+ -->
+<div [ngStyle]="ngStyle">div4....</div>
+
+
+<input type="text" (input)="changeMsg($event)" >
+<h5>用户输入的内容是:{{msg}}</h5>
+
+
+<input type="text"  [(ngModel)]="newMsg">
+<h5>用户输入的内容是:{{newMsg}}</h5>
 
 
 <br>
