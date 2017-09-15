@@ -902,6 +902,75 @@ pipe,在Angular1.x 叫做  过滤器Filter  对数据进行 格式化 或者  �
 
 
 
+```html
+<input type="text" [(ngModel)]="num">
+
+
+<p>值是：{{num}}</p>
+<!-- 使用货币管道，使用USD（美元），false：不使用美元符号  默认 保留两位小数-->
+<p>值是：{{num | currency : 'USD' :false }}</p>
+<p>值是：{{num | currency : 'USD' :true }}</p>
+<!-- 位数格式
+    ‘a.b-c’
+    a:整数部分的最小位数，不足补0
+    b:小数部分的最小位数，不足补0
+    c：小数部分的最大位数，超出部分四舍五入
+-->
+<p>值是：{{num | currency : 'USD' :true : '4.2-3'}}</p>
+
+<!-- 完成下面代码，使得两行显示内容永远相同 -->
+<p>{{ num | currency  }}</p>
+<p>{{ num | currency : 'USD' : false : '1.2-2' }}</p>
+
+<h1>jsonPipe</h1>
+<p>{{zbw}} ---- [object Object] </p>
+<p>{{zbw | json }}</p>
+
+
+<h1>datePipe</h1>
+<!-- 
+    {{ d | date [:FORMAT] }}
+    format:
+      'medium': equivalent to 'yMMMdjms' (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
+      'short': equivalent to 'yMdjm' (e.g. 9/3/2010, 12:05 PM for en-US)
+      'fullDate': equivalent to 'yMMMMEEEEd' (e.g. Friday, September 3, 2010 for en-US)
+      'longDate': equivalent to 'yMMMMd' (e.g. September 3, 2010 for en-US)
+      'mediumDate': equivalent to 'yMMMd' (e.g. Sep 3, 2010 for en-US)
+      'shortDate': equivalent to 'yMd' (e.g. 9/3/2010 for en-US)
+      'mediumTime': equivalent to 'jms' (e.g. 12:05:08 PM for en-US)
+      'shortTime': equivalent to 'jm' (e.g. 12:05 PM for en-US)
+ -->
+{{d | date : 'yyyy-MM-dd HH:mm:ss EEEE'}}
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-common-pipe',
+  templateUrl: './common-pipe.component.html',
+  styleUrls: ['./common-pipe.component.css']
+})
+export class CommonPipeComponent {
+
+  num:number = 12.3;
+
+  zbw:any = {
+    name : 'cc',
+    age : 90,
+    sex:'unknown'
+  }
+
+  d:Date = new Date();
+
+  constructor()
+  {
+    // alert(JSON.stringify(this.zbw));
+  }
+}
+
+```
+
 
 
 
