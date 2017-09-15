@@ -9,4 +9,17 @@ export class CommonPipeComponent {
 
   num:number = 12.3;
 
+  zbw:any = {
+    name : 'cc',
+    age : 90,
+    sex:'unknown'
+  }
+
+
+  d:Date = new Date();
+
+  constructor()
+  {
+    // alert(JSON.stringify(this.zbw));
+  }
 }
