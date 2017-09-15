@@ -997,3 +997,95 @@ ng g pipe 路径/名字
 
 
 
+#### 1、父组件向子组件传值-输入属性
+
+```html
+<!--父组件-->
+<p>parent works!</p>
+
+<input type="text" [(ngModel)]="name">
+<input type="text" [(ngModel)]="age">
+<span>  父组件名字是:{{name}},年龄是{{age}}</span>
+<hr><hr>
+<app-child-a [childAname]="name" [childAage]="age" ></app-child-a>
+
+```
+
+```typescript
+//子组件ts文件
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child-a',
+  templateUrl: './child-a.component.html',
+  styleUrls: ['./child-a.component.css']
+})
+export class ChildAComponent{
+
+  //该属性是一个输入属性
+  @Input()
+  childAname:string;
+
+  //该属性是一个输入属性
+  @Input()
+  childAage:string;
+}
+```
+
+```html
+<p>child-a works!</p>
+名字是:{{childAname}},年龄是{{childAage}}
+```
+
+#### 2、子组件向父组件传值-输出属性
+
+子组件
+
+```typescript
+  // 该属性是一个输出属性
+  // 对于输出属性的类型，是一个EventEmitter<原始类型>的类型
+  @Output()
+  backName:EventEmitter<string> = new EventEmitter<string>();
+
+  sendBack(){
+    //this.backName = this.childAname.toUpperCase();
+    // 调用该属性的emit方法，参数是想要传递的数据/参数是事件源
+    // EventEmiiter 用于触发一个事件的类  emit方法是触发事件
+    // 触发一个backName事件
+    this.backName.emit(this.childAname.toUpperCase());
+  }
+```
+
+父组件模板
+
+```html
+<p>parent works!</p>
+
+<input type="text" [(ngModel)]="name">
+<input type="text" [(ngModel)]="age">
+<span>  父组件名字是:{{name}},年龄是{{age}}</span>
+<h3>子组件回传的值：{{childABackName}}</h3>
+<hr><hr>
+
+<!-- 在用户自定义事件中 -->
+<app-child-a [childAname]="name" [childAage]="age" (backName)="handleBackName($event)"></app-child-a>
+
+
+<hr><hr>
+
+
+<app-child-b></app-child-b>
+```
+
+父组件
+
+```typescript
+  childABackName:string;
+  handleBackName(e)
+  {
+    this.childABackName = e;
+  }
+```
+
+
+

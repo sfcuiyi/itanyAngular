@@ -12,4 +12,9 @@ export class ParentComponent implements OnInit {
   ngOnInit() {
   }
 
+  childABackName:string;
+  handleBackName(e)
+  {
+    this.childABackName = e;
+  }
 }

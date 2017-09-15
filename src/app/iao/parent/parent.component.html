@@ -3,9 +3,11 @@
 <input type="text" [(ngModel)]="name">
 <input type="text" [(ngModel)]="age">
 <span>  父组件名字是:{{name}},年龄是{{age}}</span>
+<h3>子组件回传的值：{{childABackName}}</h3>
 <hr><hr>
 
-<app-child-a [childAname]="name" [childAage]="age" ></app-child-a>
+<!-- 在用户自定义事件中 -->
+<app-child-a [childAname]="name" [childAage]="age" (backName)="handleBackName($event)"></app-child-a>
 
 
 <hr><hr>
