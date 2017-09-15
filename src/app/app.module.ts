@@ -16,7 +16,8 @@ import { OrderByPipe } from './pipe/order-by/order-by.pipe';
 import { ParentComponent } from './iao/parent/parent.component';
 import { ChildAComponent } from './iao/child-a/child-a.component';
 import { ChildBComponent } from './iao/child-b/child-b.component';
-
+import {VoteComponent} from './homework/vote/vote.component';
+import {VoteItemComponent} from './homework/vote-item/vote-item.component';
 @NgModule({
     
   declarations: [
@@ -32,7 +33,9 @@ import { ChildBComponent } from './iao/child-b/child-b.component';
     OrderByPipe,
     ParentComponent,
     ChildAComponent,
-    ChildBComponent
+    ChildBComponent,
+    VoteComponent,
+    VoteItemComponent
   ],
   imports: [
     BrowserModule,

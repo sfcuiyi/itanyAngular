@@ -7,14 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
+  name:string = "aa";
+
   constructor() { }
 
   ngOnInit() {
   }
 
   childABackName:string;
+  someBValue:string;
   handleBackName(e)
   {
     this.childABackName = e;
+    this.someBValue = e;
   }
 }
