@@ -9,6 +9,10 @@ import { DatabindComponent } from './databind/databind.component';
 import { DirComponent } from './dir/dir.component';
 import { DirexeComponent } from './direxe/direxe.component';
 import { CommonPipeComponent } from './pipe/common-pipe/common-pipe.component';
+import { PowPipe } from './pipe/pow/pow.pipe';
+import { FilterPipe } from './pipe/filter/filter.pipe';
+import { DataFilterPipe } from './pipe/data-filter/data-filter.pipe';
+import { OrderByPipe } from './pipe/order-by/order-by.pipe';
 
 @NgModule({
     
@@ -18,7 +22,11 @@ import { CommonPipeComponent } from './pipe/common-pipe/common-pipe.component';
     DatabindComponent,
     DirComponent,
     DirexeComponent,
-    CommonPipeComponent
+    CommonPipeComponent,
+    PowPipe,
+    FilterPipe,
+    DataFilterPipe,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

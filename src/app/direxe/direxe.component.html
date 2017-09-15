@@ -1,5 +1,20 @@
 
 <div>
+
+  <input type="text" placeholder="用户名" [(ngModel)]="key" >
+
+  <select [(ngModel)]="type">
+    <option value="0" selected>不排序</option>
+    <option value="1">按照年龄升序排序</option>
+    <option value="-1">按照年龄降序排序</option>
+  </select>
+
+</div>
+
+<hr>
+
+
+<div>
   <input type="text" placeholder="用户名" [(ngModel)]="user.username" />
   <input type="text" placeholder="密码" [(ngModel)]="user.password">
   年龄：<select [(ngModel)]="user.age">
@@ -21,7 +36,7 @@
     <th>操作</th>
   </tr>
 </thead>
-  <tr *ngFor="let u of users ; index as i ">
+  <tr *ngFor="let u of users | dataFilter : key  | orderBy : type ; index as i ">
     <td>{{u.username}}</td>
     <td>{{u.password}}</td>
     <td>{{u.age}}</td>

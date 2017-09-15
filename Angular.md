@@ -253,7 +253,7 @@ import { AppComponent } from './app.component';
 
 // 装饰器 表示AppModule这个类是一个Angular的模块
 @NgModule({
-  //定义的是该模块中所有的组件
+  //定义的是该模块中所有的组件以及管道
   declarations: [
     AppComponent
   ],
@@ -892,6 +892,8 @@ addrs:Array<string> = "南京,徐州,上海,苏州,无锡,常州,北京,<a href=
 
 ### 十二、管道
 
+#### 1、内置管道
+
 pipe,在Angular1.x 叫做  过滤器Filter  对数据进行 格式化 或者  过滤 操作
 
 语法：
@@ -969,6 +971,20 @@ export class CommonPipeComponent {
   }
 }
 
+```
+
+#### 2、自定义管道
+
+##### 2-1、手动定义
+
+1. 创建管道的ts文件
+2. 在app.model.ts中引入创建的管道
+3. 和内置管道一样使用自定义管道
+
+##### 2-2、使用命令
+
+```
+ng g pipe 路径/名字
 ```
 
 

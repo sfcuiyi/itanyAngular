@@ -22,4 +22,7 @@ export class CommonPipeComponent {
   {
     // alert(JSON.stringify(this.zbw));
   }
+
+
+  arr = "1,2,34,5,6,8,98,90".split(",");
 }

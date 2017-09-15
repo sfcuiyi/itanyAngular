@@ -36,3 +36,21 @@
       'shortTime': equivalent to 'jm' (e.g. 12:05 PM for en-US)
  -->
 {{d | date : 'yyyy-MM-dd HH:mm:ss EEEE'}}
+
+
+
+<h1>自定义管道</h1>
+<p>
+    4 ^ 3 = {{ 4 | pow : 3 : 7}}
+</p>
+
+
+<hr>
+
+<ul>
+    <li *ngFor="let n of arr">{{n}}</li>
+</ul>
+<hr>
+<ul>
+    <li *ngFor="let n of arr | filter : 2 ">{{n}}</li>
+</ul>
