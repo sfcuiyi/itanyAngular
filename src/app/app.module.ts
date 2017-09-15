@@ -13,6 +13,9 @@ import { PowPipe } from './pipe/pow/pow.pipe';
 import { FilterPipe } from './pipe/filter/filter.pipe';
 import { DataFilterPipe } from './pipe/data-filter/data-filter.pipe';
 import { OrderByPipe } from './pipe/order-by/order-by.pipe';
+import { ParentComponent } from './iao/parent/parent.component';
+import { ChildAComponent } from './iao/child-a/child-a.component';
+import { ChildBComponent } from './iao/child-b/child-b.component';
 
 @NgModule({
     
@@ -26,7 +29,10 @@ import { OrderByPipe } from './pipe/order-by/order-by.pipe';
     PowPipe,
     FilterPipe,
     DataFilterPipe,
-    OrderByPipe
+    OrderByPipe,
+    ParentComponent,
+    ChildAComponent,
+    ChildBComponent
   ],
   imports: [
     BrowserModule,
