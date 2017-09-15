@@ -8,6 +8,7 @@ import { TemplateComponent } from './template/template.component';
 import { DatabindComponent } from './databind/databind.component';
 import { DirComponent } from './dir/dir.component';
 import { DirexeComponent } from './direxe/direxe.component';
+import { CommonPipeComponent } from './pipe/common-pipe/common-pipe.component';
 
 @NgModule({
     
@@ -16,7 +17,8 @@ import { DirexeComponent } from './direxe/direxe.component';
     TemplateComponent,
     DatabindComponent,
     DirComponent,
-    DirexeComponent
+    DirexeComponent,
+    CommonPipeComponent
   ],
   imports: [
     BrowserModule,

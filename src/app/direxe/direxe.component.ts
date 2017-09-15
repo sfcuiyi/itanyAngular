@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirexeComponent  {
 
+  user:any = {};
+  users:Array<any> = new Array();
 
 
 }

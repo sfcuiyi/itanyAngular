@@ -1,0 +1,18 @@
+<input type="text" [(ngModel)]="num">
+
+
+<p>值是：{{num}}</p>
+<!-- 使用货币管道，使用USD（美元），false：不使用美元符号  默认 保留两位小数-->
+<p>值是：{{num | currency : 'USD' :false }}</p>
+<p>值是：{{num | currency : 'USD' :true }}</p>
+<!-- 位数格式
+    ‘a.b-c’
+    a:整数部分的最小位数，不足补0
+    b:小数部分的最小位数，不足补0
+    c：小数部分的最大位数，超出部分四舍五入
+-->
+<p>值是：{{num | currency : 'USD' :true : '4.2-3'}}</p>
+
+<!-- 完成下面代码，使得两行显示内容永远相同 -->
+<p>{{ num | currency  }}</p>
+<p>{{ num | currency : xx : xx : xx }}</p>

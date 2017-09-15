@@ -890,6 +890,16 @@ addrs:Array<string> = "南京,徐州,上海,苏州,无锡,常州,北京,<a href=
 <button (click)="addCity()">add</button>
 ```
 
+### 十二、管道
+
+pipe,在Angular1.x 叫做  过滤器Filter  对数据进行 格式化 或者  过滤 操作
+
+语法：
+
+```html
+{{ data | 管道名字 [:管道参数:管道参数.....] }}
+```
+
 
 
 
