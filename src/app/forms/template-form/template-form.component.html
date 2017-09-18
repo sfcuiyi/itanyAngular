@@ -1,13 +1,18 @@
-<form action="a.html" method="post" #myForm="ngForm">
+<form action="a.html" method="post" #myForm="ngForm" (ngSubmit)="doSiubmitForm(myForm.value,$event)">
 
   <input type="text" ngModel name="username" placeholder="username">
-  
+  <span>错误信息</span>
+  <br>
   <input type="text" placeholder="name" #name="ngModel" name="name" ngModel>
+  <span>错误信息</span>
 
   <div ngModelGroup="pwdGroup">
 
     <input type="text" ngModel name="pwd" placeholder="pwd">
+    <span>错误信息</span>
+    <br>
     <input type="text" ngModel  name="repwd" placeholder="repwd">
+    <span>错误信息</span>
 
   </div>  
 
@@ -25,5 +30,5 @@
 
   <hr>
   <button (click)="showMyForm()">查看</button>
-
+  <input type="submit" />
 </form>

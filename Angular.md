@@ -1116,3 +1116,168 @@ Angular对于表单标签做了特殊处理，提供了两种处理表单的方�
 | ngForm       | 表单指令，会自动的被添加到form标签上，隐式的创建FormGroup类的实例（对象），该对象对应着表单的数据模型并且存储着表单中的数据。具有该指令的标签，会自动的观测（观察）所有的具有ngModel指令的子标签，并将值添加到表单的数据模型中 |
 | ngModel      | 隐式的创建了一个FormControl类的实例，用于绑定用户输入的值，在表单标签上提供该指令的时候，同时要指定name属性，作为ngForm中的value对象的key的值。与ngForm类似，ngModel也可以指定模板变量 |
 | ngModelGroup | 代表表单的一部分，将一些表单字段组织在一起，形成清晰的层级关系，生成一个FormArray实例 |
+
+```html
+<form action="a.html" method="post" #myForm="ngForm" (ngSubmit)="doSiubmitForm(myForm.value,$event)">
+
+  <input type="text" ngModel name="username" placeholder="username">
+  <span>错误信息</span>
+  <br>
+  <input type="text" placeholder="name" #name="ngModel" name="name" ngModel>
+  <span>错误信息</span>
+
+  <div ngModelGroup="pwdGroup">
+
+    <input type="text" ngModel name="pwd" placeholder="pwd">
+    <span>错误信息</span>
+    <br>
+    <input type="text" ngModel  name="repwd" placeholder="repwd">
+    <span>错误信息</span>
+
+  </div>  
+
+  <hr>
+
+  <!-- {{myForm | json }} -->
+
+  <hr>
+
+  {{myForm.value | json}}
+
+  <hr>
+
+  {{name.value}}
+
+  <hr>
+  <button (click)="showMyForm()">查看</button>
+  <input type="submit" />
+</form>
+
+```
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-template-form',
+  templateUrl: './template-form.component.html',
+  styleUrls: ['./template-form.component.css']
+})
+export class TemplateFormComponent  {
+
+  doSiubmitForm(form,e)
+  {
+    console.log("success/fail",form);
+    // e.target.submit();
+    //ajax submit
+    // 模拟表单提交
+    // 将相应的错误信息放到相应的input后面
+    // 用户名不能为空，name必须4-8位，密码6位以上，并且只能为数字，重复密码和密码一致 ==》 success
+    //  否则：fail
+
+  }
+ 
+}
+
+```
+
+#### 2、响应式表单
+
+通过TypeScript代码来创建底层的数据模型（Typescript类中的属性），使用指令将表单标签和数据模型关联在一起
+
+**创建注册表单，主要包括用户名，电子邮件，年龄，密码，重复密码**
+
+##### 2-1、创建数据模型
+
+数据模型是指用来保存表单数据的对象，简称模型，由定义在Forms模块中的三个类组成
+
+| 类的名称        | 作用                                       |
+| ----------- | ---------------------------------------- |
+| FormControl | 构成表单的基本单位，代表一个表单标签，input select等,保存了HTML元素，当前值，校验状态，是否被修改过等信息 |
+| FormGroup   | 表单的一部分或者整个表单，将多个FormControl聚合在一起         |
+| FormArray   | 可以增长的FormControl集合                       |
+
+方式1
+
+```typescript
+//有一个表单
+  // 表单中应该包含一个或者多个表单标签
+  // myForm中应该包含一个或者多个FormControl
+  myForm:FormGroup = new FormGroup({
+    //对象中定义FormControl或者FormGroup或者FormArray
+    username:new FormControl("someName"),
+    age:new FormControl(),
+    pwdGroup:new FormGroup({
+      pwd:new FormControl(),
+      rePwd:new FormControl()
+    }),
+    emails:new FormArray([
+      new FormControl("a@a.com"),
+      new FormControl("b@b.com")
+    ])
+  });
+```
+
+方式2
+
+```typescript
+myForm:FormGroup;
+  constructor(builder:FormBuilder)
+  {
+    this.myForm = builder.group({
+      username:['someVal'],
+      age : [],
+      pwdGroup:builder.group({
+        pwd:[],
+        repwd:[]
+      }),
+      emails:builder.array([
+        ['a@a.com2'],
+        ['b@b.com2']
+      ])
+    });
+  }
+```
+
+
+
+##### 2-2、连接模型和DOM
+
+通过指令将模型和dom标签连接在一起
+
+| 类型          | 指令                              |
+| ----------- | ------------------------------- |
+| FormControl | formControl  /  formControlName |
+| FormGroup   | formGroup /  formGroupName      |
+| FormArray   | formArrayName                   |
+
+```html
+<form action="" method="post" [formGroup]="myForm">
+
+  <div>
+      <input type="text" placeholder="用户名" formControlName="username">
+  </div>
+  <div>
+      <select formControlName="age">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+  </div>
+  <div formGroupName="pwdGroup">
+    <input type="text" placeholder="密码" formControlName="pwd">
+    <input type="text" placeholder="重复密码" formControlName="repwd">
+  </div>
+
+  <div>
+    <ul >
+      <li *ngFor="let e of myForm.get('emails').controls;index as i">
+        <input type="email" formControlName="i">
+      </li>
+    </ul>
+  </div>
+
+</form>
+```
+

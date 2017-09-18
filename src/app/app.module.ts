@@ -19,6 +19,7 @@ import { ChildBComponent } from './iao/child-b/child-b.component';
 import {VoteComponent} from './homework/vote/vote.component';
 import {VoteItemComponent} from './homework/vote-item/vote-item.component';
 import { TemplateFormComponent } from './forms/template-form/template-form.component';
+import { ReativeFormComponent } from './forms/reative-form/reative-form.component';
 @NgModule({
     
   declarations: [
@@ -37,7 +38,8 @@ import { TemplateFormComponent } from './forms/template-form/template-form.compo
     ChildBComponent,
     VoteComponent,
     VoteItemComponent,
-    TemplateFormComponent
+    TemplateFormComponent,
+    ReativeFormComponent
   ],
   imports: [
     BrowserModule,
