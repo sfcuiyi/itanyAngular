@@ -1,13 +1,15 @@
 <h1>后天不上课</h1>
-同意人数：7
-不同意人数：20
+同意人数：{{agreeNum}}
+不同意人数：{{disAgreeNum}}
 <hr>
-<input type="text">
-<button>添加</button>
+<h3>该提议被：<i [ngClass]="{'passed':isPassed,'denied':!isPassed}">{{isPassed?'通过':'拒绝'}}</i></h3>
 <hr>
-<div *ngFor="let item of ">
+<input type="text" [(ngModel)]="name" id="target">
+<button (click)="doAdd()">添加</button>
+<hr>
+<div *ngFor="let item of items">
 
-   <app-vote-item></app-vote-item>
+   <app-vote-item [username]="item" (vote)="changeNums($event)"></app-vote-item>
 
 </div>
 
