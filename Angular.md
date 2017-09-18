@@ -1281,3 +1281,154 @@ myForm:FormGroup;
 </form>
 ```
 
+##### 2-3、表单数据校验
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from "@angular/forms";
+@Component({
+  selector: 'app-reative-form',
+  templateUrl: './reative-form.component.html',
+  styleUrls: ['./reative-form.component.css']
+})
+export class ReativeFormComponent {
+
+  //有一个表单
+  // 表单中应该包含一个或者多个表单标签
+  // myForm中应该包含一个或者多个FormControl
+  // myForm:FormGroup = new FormGroup({
+  //   //对象中定义FormControl或者FormGroup或者FormArray
+  //   username:new FormControl("someName"),
+  //   age:new FormControl(3),
+  //   pwdGroup:new FormGroup({
+  //     pwd:new FormControl(),
+  //     repwd:new FormControl()
+  //   }),
+  //   emails:new FormArray([
+  //     new FormControl("a@a.com"),
+  //     new FormControl("b@b.com")
+  //   ])
+  // });
+
+  myForm:FormGroup;
+  constructor(builder:FormBuilder)
+  {
+    // FormControl对象是一个数组
+    //  数组的第一个参数是该表单标签的value
+    //  第二个参数是一个方法或者方法数组，该方法用于数据的校验
+    // Angular允许使用内置的校验器或者自定义校验方法进行数据校验
+    this.myForm = builder.group({
+      
+      // Validators 内置校验器，主要包括
+      /*
+       *  min:最小值
+       *  minLength：最小长度
+       *  max：最大值
+       *  maxLength：最大长度
+       *  pattern：正则表达式
+       *  required ：必须的
+       *  email：邮件
+       *  其他校验器参考API
+       */
+      // 用户名不能为空，至少6位
+      username:['someVal',[Validators.required,Validators.minLength(6)]],
+      //年龄1-2岁
+      age : ['',[Validators.min(1),Validators.max(2)]],
+      
+      // 密码和重复密码必须相等
+      pwdGroup:builder.group({
+        // 长度至少4位
+        pwd:['',Validators.minLength(4)],
+        repwd:[]
+      },{validator:this.repwdValidator}),
+      emails:builder.array([
+        ['a@a.com2'],
+        ['b@b.com2']
+      ],Validators.email)
+    });
+  }
+
+  //该方法应该存在一个参数，参数类型可以是FormControl、FormArray、FormGroup
+  // 方法的返回值是一个JSON对象，对象的key必须是string类型
+  repwdValidator(pwdGroup:FormGroup):{[key:string]:any}
+  {
+    let pwd:FormControl = pwdGroup.get("pwd") as FormControl;
+    let repwd :FormControl  = pwdGroup.get("repwd") as FormControl;
+    // console.log("==>",pwd.value);
+    return  pwd.value == repwd.value ?  null : {"error":"两次密码不一致"};
+  }
+
+  doAddEmail()
+  {
+    let fa : FormArray = this.myForm.get('emails') as FormArray;
+    fa.push(new FormControl("x@x.com"));
+  }
+
+  doSubmitForm()
+  {
+    // console.log(this.myForm);
+    // console.log(this.myForm.errors);
+    // console.log(this.myForm.get("username").errors.minlength);
+    // console.log(this.myForm.getError('minlength',['username']));
+    console.log(this.myForm.get("age").errors)
+
+    console.log(this.myForm.hasError("max",["age"]));
+   }
+
+}
+
+
+```
+
+```html
+<form action="aaa.html" method="post" [formGroup]="myForm" (ngSubmit)="doSubmitForm()">
+
+  <div>
+      <input type="text" placeholder="用户名" formControlName="username">
+  </div>
+  <div>
+      <select formControlName="age">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <span *ngIf="myForm.hasError('max','age')" >年龄必须在1-2岁</span>
+  </div>
+  <div formGroupName="pwdGroup">
+    <input type="text" placeholder="密码" formControlName="pwd"> 
+    <!-- 第二个参数 就是路径path 两种写法，1、a.b 2、["a","b"] -->
+    <!-- <span *ngIf="myForm.hasError('minlength','pwdGroup.pwd')">长度至少4位</span> -->
+    <span *ngIf="myForm.hasError('minlength',['pwdGroup','pwd'])">长度至少4位</span>
+    <br>
+    <input type="text" placeholder="重复密码" formControlName="repwd">
+    <span *ngIf="myForm.hasError('error','pwdGroup')">
+      {{myForm.getError('error','pwdGroup')}}
+    </span>
+  </div>
+
+  <div>
+    <ul formArrayName="emails">
+      <li *ngFor="let e of myForm.get('emails').controls;index as i">
+        <input type="email" [formControlName]="i">
+      </li>
+    </ul>
+    <button (click)="doAddEmail()" >添加邮件地址</button>
+  </div>
+  <div>
+    <input type="submit" value="提交">
+  </div>
+</form>
+
+<hr>
+
+<!-- 该方法接收两个参数，第一个参数是校验器返回的对象的key，第二个参数是FormControl的key 
+   返回的是true和false
+   hasError ==> true 代表 有错
+   hasError ==> false 代表 无错   
+-->
+{{ myForm.hasError('error','pwdGroup') }}
+<hr>
+<!--获取错误消息-->
+{{ myForm.getError('error','pwdGroup') }}
+```
+
