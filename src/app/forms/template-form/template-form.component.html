@@ -1,0 +1,29 @@
+<form action="a.html" method="post" #myForm="ngForm">
+
+  <input type="text" ngModel name="username" placeholder="username">
+  
+  <input type="text" placeholder="name" #name="ngModel" name="name" ngModel>
+
+  <div ngModelGroup="pwdGroup">
+
+    <input type="text" ngModel name="pwd" placeholder="pwd">
+    <input type="text" ngModel  name="repwd" placeholder="repwd">
+
+  </div>  
+
+  <hr>
+
+  <!-- {{myForm | json }} -->
+
+  <hr>
+
+  {{myForm.value | json}}
+
+  <hr>
+
+  {{name.value}}
+
+  <hr>
+  <button (click)="showMyForm()">查看</button>
+
+</form>

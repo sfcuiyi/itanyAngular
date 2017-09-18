@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { ChildAComponent } from './iao/child-a/child-a.component';
 import { ChildBComponent } from './iao/child-b/child-b.component';
 import {VoteComponent} from './homework/vote/vote.component';
 import {VoteItemComponent} from './homework/vote-item/vote-item.component';
+import { TemplateFormComponent } from './forms/template-form/template-form.component';
 @NgModule({
     
   declarations: [
@@ -35,12 +36,16 @@ import {VoteItemComponent} from './homework/vote-item/vote-item.component';
     ChildAComponent,
     ChildBComponent,
     VoteComponent,
-    VoteItemComponent
+    VoteItemComponent,
+    TemplateFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    // 模板式表单
+    FormsModule,
+    //响应式表单
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

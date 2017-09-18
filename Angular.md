@@ -1089,3 +1089,30 @@ export class ChildAComponent{
 
 
 
+### 十四、表单处理
+
+Angular对于表单标签做了特殊处理，提供了两种处理表单的方式，分别叫做 模板式表单  和  响应式表单，对应两个不同的模块
+
+```typescript
+//app.module.ts
+ imports: [
+    BrowserModule,
+    AppRoutingModule,
+    // 模板式表单
+    FormsModule,
+    //响应式表单
+    ReactiveFormsModule
+  ],
+```
+
+#### 1、模板式表单
+
+适用于一些简单场景（用于处理简单的表单）
+
+使用指令来定义表单控件
+
+| 名称           | 作用                                       |
+| ------------ | ---------------------------------------- |
+| ngForm       | 表单指令，会自动的被添加到form标签上，隐式的创建FormGroup类的实例（对象），该对象对应着表单的数据模型并且存储着表单中的数据。具有该指令的标签，会自动的观测（观察）所有的具有ngModel指令的子标签，并将值添加到表单的数据模型中 |
+| ngModel      | 隐式的创建了一个FormControl类的实例，用于绑定用户输入的值，在表单标签上提供该指令的时候，同时要指定name属性，作为ngForm中的value对象的key的值。与ngForm类似，ngModel也可以指定模板变量 |
+| ngModelGroup | 代表表单的一部分，将一些表单字段组织在一起，形成清晰的层级关系，生成一个FormArray实例 |
