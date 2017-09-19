@@ -2,6 +2,8 @@
 
   <div>
       <input type="text" placeholder="用户名" formControlName="username">
+      <span *ngIf="myForm.hasError('required','username')" >用户名不能为空</span>
+      <span *ngIf="myForm.hasError('minlength','username')" >用户名长度至少6位</span>
   </div>
   <div>
       <select formControlName="age">
@@ -29,6 +31,7 @@
         <input type="email" [formControlName]="i">
       </li>
     </ul>
+    <span *ngIf="myForm.hasError('email','emails') ">邮件地址不合法</span>
     <button (click)="doAddEmail()" >添加邮件地址</button>
   </div>
   <div>

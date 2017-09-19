@@ -45,7 +45,7 @@ export class ReativeFormComponent {
        *  其他校验器参考API
        */
       // 用户名不能为空，至少6位
-      username:['someVal',[Validators.required,Validators.minLength(6)]],
+      username:['',[Validators.required,Validators.minLength(6)]],
       //年龄1-2岁
       age : ['',[Validators.min(1),Validators.max(2)]],
       
@@ -55,10 +55,7 @@ export class ReativeFormComponent {
         pwd:['',Validators.minLength(4)],
         repwd:[]
       },{validator:this.repwdValidator}),
-      emails:builder.array([
-        ['a@a.com2'],
-        ['b@b.com2']
-      ],Validators.email)
+      emails:builder.array([],Validators.email)
     });
   }
 
@@ -69,13 +66,14 @@ export class ReativeFormComponent {
     let pwd:FormControl = pwdGroup.get("pwd") as FormControl;
     let repwd :FormControl  = pwdGroup.get("repwd") as FormControl;
     // console.log("==>",pwd.value);
+    console.log("pwd == repwd",pwd.value == repwd.value ,".."+pwd.value+",,")
     return  pwd.value == repwd.value ?  null : {"error":"两次密码不一致"};
   }
 
   doAddEmail()
   {
     let fa : FormArray = this.myForm.get('emails') as FormArray;
-    fa.push(new FormControl("x@x.com"));
+    fa.push(new FormControl());
   }
 
   doSubmitForm()
@@ -84,9 +82,12 @@ export class ReativeFormComponent {
     // console.log(this.myForm.errors);
     // console.log(this.myForm.get("username").errors.minlength);
     // console.log(this.myForm.getError('minlength',['username']));
-    console.log(this.myForm.get("age").errors)
+    console.log(this.myForm.invalid)
 
     console.log(this.myForm.hasError("max",["age"]));
+
+
+    console.log("error==>",this.myForm.get("emails").errors);
    }
 
 }

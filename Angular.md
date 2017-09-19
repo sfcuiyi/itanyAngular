@@ -1432,3 +1432,37 @@ export class ReativeFormComponent {
 {{ myForm.getError('error','pwdGroup') }}
 ```
 
+##### 2-4、校验状态字段
+
+| 状态（全是boolean） | 作用（以true为例）                             |
+| ------------- | --------------------------------------- |
+| touched       | 该表单元素被访问过（获取焦点、失去焦点）                    |
+| untouched     | 从未访问过该表单元素 touched = !untouched         |
+| pristine      | 该表单元素值没被[用户]修改过                         |
+| dirty         | 该表单元素值被[用户]修改过 pristine = !dirty        |
+| pending       | 当使用异步请求进行数据校验的时候，在请求到响应过程中，状态一直为pending |
+| valid         | 校验合法                                    |
+| invalid       | 校验不合法                                   |
+
+
+
+以上状态对FormControl FormGroup FormArray 都适用 
+
+当且仅当 FormGroup或者FormArray中的子元素的状态都是true的时候，FormGroup FormArray 的状态 才为 true
+
+
+
+
+
+
+
+
+
+
+
+### 路由
+
+### DI
+
+### HTTP服务
+
