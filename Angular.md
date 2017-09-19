@@ -1460,13 +1460,140 @@ export class ReativeFormComponent {
 
 
 
+### 十五、DI
 
+#### 1、简介
+
+Dependency Injection  依赖注入:将某个类的实例注入到另一个类中
+
+假设 A 类中 需要使用B类中的方法 ==> A类中 必然要存在 B的对象（实例）
+
+```typescript
+export class B{
+  test(){}
+}
+export class A{
+  someMethod()
+  {
+    //调用B类的test方法
+    let b = new B();
+    b.test();
+  }
+}
+```
+
+- A类中自己创建B的实例
+- 将A类的对象注入到B类中，此时A是不关心B的创建方式和创建过程的
+
+```typescript
+export class A{
+  b : B;
+  constructor(b : B)
+  {
+    this.b = b;
+  }
+  someMethod()
+  {
+    this.b.test();
+  }
+}
+```
+
+Angular 只提供了一种注入方式：通过构造方法注入
+
+作用：解耦合：当一个类发生改变的时候，对其他的类没有影响
+
+#### 2、DI的实现
+
+##### 2-1 创建service
+
+```powershell
+ng g service 名字
+```
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class MathserviceService {
+
+
+  plus(x :number,y:number):number
+  {
+    return x + y;
+  }
+
+  mins(x :number,y:number):number
+  {
+    return x - y;
+  }
+
+  multy(x :number,y:number):number
+  {
+    return x * y;
+  }
+
+  devide(x :number,y:number):number
+  {
+    return x / y;
+  }
+
+
+}
+
+```
+
+
+
+##### 2-2 配置service的提供者provider
+
+app.module.ts
+
+```typescript
+ // 配置provider
+  // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
+  providers: [
+    //方式1
+    MathserviceService
+ ],
+```
+
+##### 2-3 使用构造方法注入
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { MathserviceService } from '../mathservice.service';
+
+@Component({
+  selector: 'app-some',
+  templateUrl: './some.component.html',
+  styleUrls: ['./some.component.css']
+})
+export class SomeComponent {
+  constructor(public s:MathserviceService) {
+  }
+
+  m:number;
+  n:number;
+  result:number;
+
+  doPlus()
+  {
+    this.result = this.s.plus(this.m*1,this.n*1);
+  }
+
+  doMins()
+  {
+    this.result = this.s.mins(this.m,this.n);
+  }
+
+}
+
+```
 
 
 
 ### 路由
-
-### DI
 
 ### HTTP服务
 

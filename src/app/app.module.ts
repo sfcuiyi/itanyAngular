@@ -20,6 +20,8 @@ import {VoteComponent} from './homework/vote/vote.component';
 import {VoteItemComponent} from './homework/vote-item/vote-item.component';
 import { TemplateFormComponent } from './forms/template-form/template-form.component';
 import { ReativeFormComponent } from './forms/reative-form/reative-form.component';
+import { MathserviceService } from './services/mathservice.service';
+import { SomeComponent } from './services/some/some.component';
 @NgModule({
     
   declarations: [
@@ -39,7 +41,8 @@ import { ReativeFormComponent } from './forms/reative-form/reative-form.componen
     VoteComponent,
     VoteItemComponent,
     TemplateFormComponent,
-    ReativeFormComponent
+    ReativeFormComponent,
+    SomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,12 @@ import { ReativeFormComponent } from './forms/reative-form/reative-form.componen
     //响应式表单
     ReactiveFormsModule
   ],
-  providers: [],
+  // 配置provider
+  // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
+  providers: [
+    //方式1
+    MathserviceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
