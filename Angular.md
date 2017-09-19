@@ -1452,7 +1452,11 @@ export class ReativeFormComponent {
 
 
 
-
+> dirty / pristine 和 touched / untouched 的区别
+>
+> 前者关心的是值是否被修改过（即使最终修改的值和原始值一样，也是被修改过）
+>
+> 后者关系的是表单元素是否被访问过（触发过blur事件）
 
 
 
