@@ -1554,7 +1554,12 @@ app.module.ts
   // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
   providers: [
     //方式1
-    MathserviceService
+    // 方式1是方式2的简写，当方式2中的provide值和useClass值一致的时候，可以简写为方式1
+    MathserviceService,
+    //方式2
+    // 全局的某个组件或者某个服务中，可能需要注入一个SomeService类型的对象，
+    //如果需要注入该类型的对象，请使用SomeServiceImplAService的对象注入
+    {provide:SomeService,useClass:SomeServiceImplBService}
  ],
 ```
 

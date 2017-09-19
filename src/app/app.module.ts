@@ -22,6 +22,10 @@ import { TemplateFormComponent } from './forms/template-form/template-form.compo
 import { ReativeFormComponent } from './forms/reative-form/reative-form.component';
 import { MathserviceService } from './services/mathservice.service';
 import { SomeComponent } from './services/some/some.component';
+import { MathplusService } from './services/mathplus.service';
+import { SomeServiceImplAService } from './services/someService/some-service-impl-a.service';
+import { SomeServiceImplBService } from './services/someService/some-service-impl-b.service';
+import {SomeService} from './services/someService/SomeService'
 @NgModule({
     
   declarations: [
@@ -56,7 +60,14 @@ import { SomeComponent } from './services/some/some.component';
   // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
   providers: [
     //方式1
-    MathserviceService
+    // MathserviceService,
+    // MathplusService,
+    {provide:MathserviceService,useClass:MathplusService},
+    // SomeServiceImplAService,
+    // SomeServiceImplBService
+    // 全局的某个组件或者某个服务中，可能需要注入一个SomeService类型的对象，
+    //如果需要注入该类型的对象，请使用SomeServiceImplAService的对象注入
+    {provide:SomeService,useClass:SomeServiceImplBService}
   ],
   bootstrap: [AppComponent]
 })

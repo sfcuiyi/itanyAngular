@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MathserviceService } from '../mathservice.service';
+import { SomeService } from '../someService/SomeService';
 
 @Component({
   selector: 'app-some',
@@ -9,6 +10,13 @@ import { MathserviceService } from '../mathservice.service';
 export class SomeComponent {
   constructor(public s:MathserviceService) {
   }
+
+  // constructor(
+  //   public s:SomeService
+  // )
+  // {
+
+  // }
 
   m:number;
   n:number;
@@ -21,7 +29,7 @@ export class SomeComponent {
 
   doMins()
   {
-    this.result = this.s.mins(this.m,this.n);
+    // this.result = this.s.mins(this.m,this.n);
   }
 
 }
