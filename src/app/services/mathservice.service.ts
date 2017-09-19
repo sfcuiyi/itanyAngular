@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable()
 export class MathserviceService {
 
+  constructor(fb:FormBuilder)
+  {
+    
+  }
 
   plus(x :number,y:number):number
   {

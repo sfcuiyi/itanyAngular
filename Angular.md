@@ -1593,12 +1593,58 @@ export class SomeComponent {
   }
 
 }
-
 ```
+
+##### 2-4、几个特性
+
+- Angular 只能使用构造方法实现依赖注入
+
+- providers配置不但可以配置在app.module.ts中，也可以配置在组件或者其他服务中
+
+  ```typescript
+  @Component({
+    selector: 'app-some',
+    templateUrl: './some.component.html',
+    styleUrls: ['./some.component.css'],
+    providers:[
+      // 几乎不用
+      MathserviceService
+    ]
+  })
+  ```
+
+- 组件搜索providers的过程
+
+  > 首先寻找组件自己有没有对应的Provider —>有 —> 使用自己的Provider
+  >
+  > —> 没有 —> 找父组件的providers
+  >
+  > …..
+  >
+  > —> app.module.ts
+  >
+  > —> 没有：报错
+
+- @injectable()
+
+  > 表示可注入的，对于以下代码
+
+  ```typescript
+  @Injectable()
+  export class Some{}
+  ```
+
+  Some 的构造方法中可以注入其他service
+
+  对于某个类如果被@Injectable装饰，表示该类的构造方法中可以进行注入
+
+  @Component 继承了 @Injectable
+
+### 十六、HTTP服务
 
 
 
 ### 路由
 
-### HTTP服务
+### 
 
