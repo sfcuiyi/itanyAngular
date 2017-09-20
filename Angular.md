@@ -1642,6 +1642,107 @@ export class SomeComponent {
 
 ### 十六、HTTP服务
 
+#### 1、导入HTTP模块
+
+app.module.ts
+
+```typescript
+ imports: [
+    BrowserModule,
+    AppRoutingModule,
+    // 模板式表单
+    FormsModule,
+    //响应式表单
+    ReactiveFormsModule,
+    // 对应Http服务的模块
+    HttpModule,
+    //处理跨域请求
+    JsonpModule
+  ],
+```
+
+#### 2、创建代理（实现跨域请求）
+
+Angular使用  反向代理的方式实现跨域
+
+创建一个 代理的配置文件，文件名任意 ,建议使用 proxy.cfg.json
+
+```json
+{
+  	//url地址的最后一部分
+    "/api":{
+      	// url地址除了最后一部分的内容
+        "target":"http://www.tuling123.com/openapi"
+    }
+}
+```
+
+使用:
+
+```powershell
+ng serve --proxy-config proxy.config.json
+```
+
+package.json
+
+```json
+ "scripts": {
+    "ng": "ng",
+    "start": "ng serve --proxy-config proxy.cfg.json",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+```
+
+```powershell
+cnpm start
+```
+
+#### 3、注入Http服务
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
+@Component({
+  selector: 'app-http',
+  templateUrl: './http.component.html',
+  styleUrls: ['./http.component.css']
+})
+export class HttpComponent  {
+
+  constructor(
+    private http:Http
+  ) { }
+
+  msg:string;
+  data:any;
+
+  loadData()
+  {
+    let url:string = "/api";
+    let body :any = {
+      "key":"397bdd94b69f440b91d9e020da625c73",
+      "info":this.msg,
+      "userid":"123",
+    };
+    // Observable 来自于rxjs 响应式js Reactive Extensions for JavaScript,Javascript的响应式扩展,
+    let response:Observable<any>  =   this.http.post(url,body);
+    //对于Observable类型参数，都可以对其进行订阅操作 类似于Promise中的then
+    response.subscribe((data)=>{
+      console.log(data);
+      this.data = data.json().text;
+    });
+
+  }
+  
+}
+
+```
+
 
 
 ### 路由

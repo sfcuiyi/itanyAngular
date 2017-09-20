@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,8 @@ import { SomeComponent } from './services/some/some.component';
 import { MathplusService } from './services/mathplus.service';
 import { SomeServiceImplAService } from './services/someService/some-service-impl-a.service';
 import { SomeServiceImplBService } from './services/someService/some-service-impl-b.service';
-import {SomeService} from './services/someService/SomeService'
+import {SomeService} from './services/someService/SomeService';
+import { HttpComponent } from './http/http.component'
 @NgModule({
     
   declarations: [
@@ -46,7 +48,8 @@ import {SomeService} from './services/someService/SomeService'
     VoteItemComponent,
     TemplateFormComponent,
     ReativeFormComponent,
-    SomeComponent
+    SomeComponent,
+    HttpComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,11 @@ import {SomeService} from './services/someService/SomeService'
     // 模板式表单
     FormsModule,
     //响应式表单
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // 对应Http服务的模块
+    HttpModule,
+    //处理跨域请求
+    JsonpModule
   ],
   // 配置provider
   // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
