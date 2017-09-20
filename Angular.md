@@ -1670,10 +1670,14 @@ Angular使用  反向代理的方式实现跨域
 ```json
 {
   	//url地址的最后一部分
-    "/api":{
+    //"/api":{
       	// url地址除了最后一部分的内容
-        "target":"http://www.tuling123.com/openapi"
-    }
+     //   "target":"http://www.tuling123.com/openapi"
+    //}
+  	// 
+  	"/openapi":{
+      "target":"http://www.tuling123.com"
+  	}
 }
 ```
 
@@ -1723,7 +1727,8 @@ export class HttpComponent  {
 
   loadData()
   {
-    let url:string = "/api";
+    // 当发送请求的时候，会首先去proxy中找有没有对应数据，如果有，将对应数据的target值拼接到url前
+    let url:string = "/openapi/api";
     let body :any = {
       "key":"397bdd94b69f440b91d9e020da625c73",
       "info":this.msg,
@@ -1740,7 +1745,6 @@ export class HttpComponent  {
   }
   
 }
-
 ```
 
 
