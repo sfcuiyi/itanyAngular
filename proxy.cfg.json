@@ -2,7 +2,17 @@
     "/openapi":{
         "target":"http://www.tuling123.com"
     },
+    
+    "/weatherz":{
+        "target":"http://v.juhe.cn"
+    },
+
     "/weather":{
-        "target":"http://116.211.169.230"
+        "target":{
+            "host":"v.juhe.cn",
+            "protocol":"http:",
+            "port":80
+        },
+        "changeOrigin":true
     }
 }

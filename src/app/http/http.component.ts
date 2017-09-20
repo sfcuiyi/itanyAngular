@@ -35,21 +35,13 @@ export class HttpComponent  {
 
   loadWeather()
   {
-    //3b005a8e40325ef5aa6bfb908dfbac77   format=2&cityname=%E8%8B%8F%E5%B7%9E&key=您申请的KEY
-    // 设置get请求参数
-    let params = new URLSearchParams();
-    params.append("format","2");
-    params.append("cityname",this.msg);
-    params.append("key","3b005a8e40325ef5aa6bfb908dfbac77");
-
-    let url :string = "/weather/index";
+    let url = `/weather/index?format=2&cityname=${this.msg}&key=3b005a8e40325ef5aa6bfb908dfbac77`;
     this.http
-        .post(url,params)
+        .get(url)
         .subscribe((data)=>{
-          this.data = data.json();
-        });
+          this.data = data;
+        })
   }
-
   
 
 }
