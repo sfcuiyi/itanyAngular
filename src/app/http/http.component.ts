@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http ,URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+//导入一个方法
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-http',
@@ -64,6 +66,29 @@ export class HttpComponent  {
           this.data = data.json();
           console.log(this.data);
         })
+  }
+
+  loadBus2()
+  {
+    let url = "/189/bus/busline";
+    let params:URLSearchParams = new URLSearchParams();
+    params.append("key","b445baba27cb198d90c1640836ad0891");
+    params.append("city",this.msg.split(";")[0]);
+    params.append("bus",this.msg.split(";")[1]);
+    
+    this.http
+        .post(url,params)
+        // 将Observable对象转换成Promise对象
+        .toPromise()
+        .then((data)=> this.data = data.json());
+  }
+
+  // 配合async管道使用，要求响应的数据必须是一个数组类型
+  city:Observable<any>;
+  loadBus3()
+  {
+    let url = "/stream/widget/local_weather/city/";
+    this.city = this.http.get(url);
   }
 
 }

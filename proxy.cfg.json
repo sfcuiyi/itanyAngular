@@ -18,5 +18,9 @@
     "/189":{
         "target":"http://op.juhe.cn",
         "changeOrigin":true
+    },
+    "/stream":{
+        "target":"https://www.toutiao.com",
+        "changeOrigin":true
     }
 }

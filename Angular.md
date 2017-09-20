@@ -1720,6 +1720,8 @@ cnpm run start
 import { Component, OnInit } from '@angular/core';
 import { Http ,URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+//导入一个方法
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-http',
@@ -1733,7 +1735,11 @@ export class HttpComponent  {
   ) { }
 
   msg:string;
-  data:any;
+  data:any = {
+    result:[
+      {}
+    ]
+  };
 
   loadData()
   {
@@ -1763,12 +1769,110 @@ export class HttpComponent  {
   }
   
 
+  loadBus()
+  {
+    //b445baba27cb198d90c1640836ad0891
+    let url = "/189/bus/busline";
+    // 用于构建post请求的参数
+    let params:URLSearchParams = new URLSearchParams();
+    // 第一个参数是 要传递的参数的key  第二个参数是value
+    params.append("key","b445baba27cb198d90c1640836ad0891");
+    params.append("city",this.msg.split(";")[0]);
+    params.append("bus",this.msg.split(";")[1]);
+    this.http
+        .post(url,params)
+        .subscribe((data)=>{
+          this.data = data.json();
+          console.log(this.data);
+        })
+  }
+
+  loadBus2()
+  {
+    let url = "/189/bus/busline";
+    let params:URLSearchParams = new URLSearchParams();
+    params.append("key","b445baba27cb198d90c1640836ad0891");
+    params.append("city",this.msg.split(";")[0]);
+    params.append("bus",this.msg.split(";")[1]);
+    
+    this.http
+        .post(url,params)
+        // 将Observable对象转换成Promise对象
+        .toPromise()
+        .then((data)=> this.data = data.json());
+  }
+
+  // 配合async管道使用，要求响应的数据必须是一个数组类型
+  city:Observable<any>;
+  loadBus3()
+  {
+    let url = "/stream/widget/local_weather/city/";
+    this.city = this.http.get(url);
+  }
+
 }
 
 ```
 
 ```html
 
+<input type="text" [(ngModel)]="msg" />
+<button (click)="loadData()">请求数据-基本请求方式</button>
+
+<button (click)="loadWeather()">获取天气信息-get请求参数传递方式</button>
+
+<button (click)="loadBus()">获取公交信息-post请求参数传递方式</button>
+
+<button (click)="loadBus2()">获取公交信息-post-对响应的数据的另一种处理方式</button>
+
+<button (click)="loadBus3()">获取公交信息-post-对响应的数据的另另一种处理方式</button>
+
+<!-- <div>{{ data | json }}</div> -->
+
+<div>
+    <ul>
+        <li *ngFor=" let item of data.result[0].stationdes ">{{ item.name }}</li>
+    </ul>
+</div>
+
+<hr>
+
+
+<div>
+    <ul>
+       <!-- <li *ngFor="let i of city async )">aaa</li> -->
+    </ul>
+</div>
+```
+
+```json
+//proxy.cfg.json
+{
+    "/openapi":{
+        "target":"http://www.tuling123.com"
+    },
+    
+    "/weatherz":{
+        "target":"http://v.juhe.cn"
+    },
+
+    "/weather":{
+        "target":{
+            "host":"v.juhe.cn",
+            "protocol":"http:",
+            "port":80
+        },
+        "changeOrigin":true
+    },
+    "/189":{
+        "target":"http://op.juhe.cn",
+        "changeOrigin":true
+    },
+    "/stream":{
+        "target":"https://www.toutiao.com",
+        "changeOrigin":true
+    }
+}
 ```
 
 

@@ -6,10 +6,23 @@
 
 <button (click)="loadBus()">获取公交信息-post请求参数传递方式</button>
 
+<button (click)="loadBus2()">获取公交信息-post-对响应的数据的另一种处理方式</button>
+
+<button (click)="loadBus3()">获取公交信息-post-对响应的数据的另另一种处理方式</button>
+
 <!-- <div>{{ data | json }}</div> -->
 
 <div>
     <ul>
         <li *ngFor=" let item of data.result[0].stationdes ">{{ item.name }}</li>
+    </ul>
+</div>
+
+<hr>
+
+
+<div>
+    <ul>
+       <!-- <li *ngFor="let i of city async )">aaa</li> -->
     </ul>
 </div>
