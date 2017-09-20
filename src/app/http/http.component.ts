@@ -14,7 +14,11 @@ export class HttpComponent  {
   ) { }
 
   msg:string;
-  data:any;
+  data:any = {
+    result:[
+      {}
+    ]
+  };
 
   loadData()
   {
@@ -43,5 +47,23 @@ export class HttpComponent  {
         })
   }
   
+
+  loadBus()
+  {
+    //b445baba27cb198d90c1640836ad0891
+    let url = "/189/bus/busline";
+    // 用于构建post请求的参数
+    let params:URLSearchParams = new URLSearchParams();
+    // 第一个参数是 要传递的参数的key  第二个参数是value
+    params.append("key","b445baba27cb198d90c1640836ad0891");
+    params.append("city",this.msg.split(";")[0]);
+    params.append("bus",this.msg.split(";")[1]);
+    this.http
+        .post(url,params)
+        .subscribe((data)=>{
+          this.data = data.json();
+          console.log(this.data);
+        })
+  }
 
 }

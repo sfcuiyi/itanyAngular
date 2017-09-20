@@ -1,9 +1,15 @@
 
 <input type="text" [(ngModel)]="msg" />
-<button (click)="loadData()">请求数据</button>
+<button (click)="loadData()">请求数据-基本请求方式</button>
 
-<button (click)="loadWeather()">获取天气信息</button>
-<hr>
+<button (click)="loadWeather()">获取天气信息-get请求参数传递方式</button>
 
+<button (click)="loadBus()">获取公交信息-post请求参数传递方式</button>
 
-<div>{{ data | json }}</div>
+<!-- <div>{{ data | json }}</div> -->
+
+<div>
+    <ul>
+        <li *ngFor=" let item of data.result[0].stationdes ">{{ item.name }}</li>
+    </ul>
+</div>

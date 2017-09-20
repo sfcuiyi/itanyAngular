@@ -1669,15 +1669,25 @@ Angular使用  反向代理的方式实现跨域
 
 ```json
 {
-  	//url地址的最后一部分
-    //"/api":{
-      	// url地址除了最后一部分的内容
-     //   "target":"http://www.tuling123.com/openapi"
-    //}
-  	// 
-  	"/openapi":{
-      "target":"http://www.tuling123.com"
-  	}
+  	// 域名后的第一部分
+    "/openapi":{
+      	// 域名部分
+        "target":"http://www.tuling123.com"
+    },
+    // 聚合数据平台对以下配置方式不支持
+    "/weatherz":{
+        "target":"http://v.juhe.cn"
+    },
+	
+    //2017年后，提供了新的配置方式
+    "/weather":{
+        "target":{
+            "host":"v.juhe.cn",//域名
+            "protocol":"http:",//协议
+            "port":80//端口
+        },
+        "changeOrigin":true//是否修改域
+    }
 }
 ```
 
@@ -1701,14 +1711,14 @@ package.json
 ```
 
 ```powershell
-cnpm start
+cnpm run start
 ```
 
 #### 3、注入Http服务
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http ,URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -1719,7 +1729,7 @@ import { Observable } from 'rxjs/Observable';
 export class HttpComponent  {
 
   constructor(
-    private http:Http
+    private http:Http, 
   ) { }
 
   msg:string;
@@ -1727,7 +1737,6 @@ export class HttpComponent  {
 
   loadData()
   {
-    // 当发送请求的时候，会首先去proxy中找有没有对应数据，如果有，将对应数据的target值拼接到url前
     let url:string = "/openapi/api";
     let body :any = {
       "key":"397bdd94b69f440b91d9e020da625c73",
@@ -1741,10 +1750,25 @@ export class HttpComponent  {
       console.log(data);
       this.data = data.json().text;
     });
+  }
 
+  loadWeather()
+  {
+    let url = `/weather/index?format=2&cityname=${this.msg}&key=3b005a8e40325ef5aa6bfb908dfbac77`;
+    this.http
+        .get(url)
+        .subscribe((data)=>{
+          this.data = data;
+        })
   }
   
+
 }
+
+```
+
+```html
+
 ```
 
 

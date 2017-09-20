@@ -14,5 +14,9 @@
             "port":80
         },
         "changeOrigin":true
+    },
+    "/189":{
+        "target":"http://op.juhe.cn",
+        "changeOrigin":true
     }
 }
