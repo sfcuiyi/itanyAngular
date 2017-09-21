@@ -1,0 +1,16 @@
+
+
+
+<h3>
+  <a routerLink="./">当前</a>
+</h3>
+
+<h3>
+  <!-- 相对路径  相对于浏览器地址栏的路径 -->
+  <a routerLink="child">子路由-child</a>
+  <a routerLink="./child">子路由-./child</a>
+  <!-- 绝对路径  相对于项目根路径的路径   localhost:4200 -->
+  <a routerLink="/child">子路由-/child</a>
+</h3>
+<hr>
+<router-outlet></router-outlet>

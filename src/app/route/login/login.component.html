@@ -1,3 +1,7 @@
-<p>
-  login works!
-</p>
+<h1>login</h1>
+
+
+<input type="text" [(ngModel)]="username" />
+
+
+<a routerLink="/edit" [queryParams]="{'username':username}">编辑</a>

@@ -28,6 +28,15 @@
         <li>
           <a routerLink="/loginPage">登录</a>
         </li>
+        <li>
+          <a routerLink="/parent">父路由</a>
+        </li>
+        <li>
+            <a [routerLink]="[{outlets: { primary:'regist',otherOutlet:'loginWithOther' } }]">显示登录到辅助路由</a>
+        </li>
+        <li>
+            <a [routerLink]="[{outlets: { otherOutlet:null } }]">隐藏辅助路由</a>
+        </li>
       </ul>
 
   </div>
@@ -36,5 +45,9 @@
     <router-outlet></router-outlet>
   </div>
  
+
+  <div class="ccc fixBottom">
+    <router-outlet name="otherOutlet"></router-outlet>
+  </div>
 
 </div>

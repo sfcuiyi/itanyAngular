@@ -5,3 +5,14 @@ ul li{
     margin-top: 20px;
     padding: 10px;
 }
+.ccc{
+    background-color: #ccc;
+    width: 400px;
+    height: 300px;
+}
+
+.fixBottom{
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}

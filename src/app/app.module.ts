@@ -32,7 +32,12 @@ import { RegistComponent } from './route/regist/regist.component';
 import { LoginComponent } from './route/login/login.component';
 import { MainComponent } from './route/main/main.component';
 import { AboutusComponent } from './route/aboutus/aboutus.component';
-import { NotfoundComponent } from './route/notfound/notfound.component'
+import { NotfoundComponent } from './route/notfound/notfound.component';
+import { ChildComponent } from './route/child/child.component'
+import { ParentRouterComponent } from './route/parent/parent.component';
+import { EditComponent } from './route/edit/edit.component'
+import { Gard } from './route/Gard';
+import { HashLocationStrategy,LocationStrategy } from '@angular/common';
 @NgModule({
     
   declarations: [
@@ -59,7 +64,10 @@ import { NotfoundComponent } from './route/notfound/notfound.component'
     LoginComponent,
     MainComponent,
     AboutusComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    ChildComponent,
+    ParentRouterComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +93,10 @@ import { NotfoundComponent } from './route/notfound/notfound.component'
     // SomeServiceImplBService
     // 全局的某个组件或者某个服务中，可能需要注入一个SomeService类型的对象，
     //如果需要注入该类型的对象，请使用SomeServiceImplAService的对象注入
-    {provide:SomeService,useClass:SomeServiceImplBService}
+    {provide:SomeService,useClass:SomeServiceImplBService},
+    Gard,
+    // 浏览器的定位策略
+    {provide:LocationStrategy,useClass:HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

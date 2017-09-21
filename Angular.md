@@ -2092,3 +2092,168 @@ AboutComponent
   {path:'loginPage',redirectTo:"aaa",pathMatch:"prefix"},
 ```
 
+#### 8、子路由
+
+```typescript
+{
+    path:'parent',
+    component:ParentRouterComponent
+    ,children:[
+      {path:'',component:ParentRouterComponent},
+      // /parent/child
+      // 会使用组件模板替换parent组件模板中的router-outlet
+      {path:'child',component:ChildComponent}
+    ]
+  }, 
+```
+
+```html
+<h3>
+  <a routerLink="./">当前</a>
+</h3>
+
+<h3>
+  <!-- 相对路径  相对于浏览器地址栏的路径 -->
+  <a routerLink="child">子路由-child</a>
+  <a routerLink="./child">子路由-./child</a>
+  <!-- 绝对路径  相对于项目根路径的路径   localhost:4200 -->
+  <a routerLink="/child">子路由-/child</a>
+</h3>
+<hr>
+<router-outlet></router-outlet>
+```
+
+#### 9、辅助路由（多路由）
+
+带有name属性的router-outlet
+
+> ​	一个页面上可以有且仅有一个 主路由 primary 
+>
+> ​	但是可以有多个辅助路由
+
+```html
+ <div class="col-lg-8">
+    <router-outlet></router-outlet>
+  </div>
+ 
+
+  <div class="ccc fixBottom">
+    <router-outlet name="otherOutlet"></router-outlet>
+  </div>
+```
+
+```typescript
+{path:"loginWithOther",component:LoginComponent,outlet:'otherOutlet'},
+```
+
+```html
+   <li>
+            <a [routerLink]="[{outlets: { primary:'regist',otherOutlet:'loginWithOther' } }]">显示登录到辅助路由</a>
+        </li>
+        <li>
+            <a [routerLink]="[{outlets: { otherOutlet:null } }]">隐藏辅助路由</a>
+        </li>
+
+  <div class="col-lg-8">
+    <router-outlet></router-outlet>
+  </div>
+ 
+
+  <div class="ccc fixBottom">
+    <router-outlet name="otherOutlet"></router-outlet>
+  </div>
+```
+
+#### 10、路由守卫
+
+控制是否能够 激活 或者 离开 某个路由
+
+是一些钩子（在特定场景下执行的特定方法，一般情况下，钩子函数不需要程序员自己调用）
+
+| 名称            | 作用                  |
+| ------------- | ------------------- |
+| canActivate   | 决定是否激活（进入）某个路由      |
+| canDeactivate | 决定是否可以离开某个路由        |
+| resolve       | 在进入某个路由前的守卫，用于初始化数据 |
+
+1、定义ts类
+
+类中方法的方法名、参数、返回值
+
+@Injectable装饰器
+
+```typescript
+import { CanActivate, CanDeactivate, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { EditComponent } from "./edit/edit.component";
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class Gard implements CanActivate,CanDeactivate<EditComponent>,Resolve<string>{
+    
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+        // 进入路有前执行，用于初始化数据
+        console.log("准备进入eidt")
+        return null;
+    }
+    canDeactivate(component: EditComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot) {
+        // 返回boolean类型  true 能离开 路由
+        if(component.username != "aaa")
+        {
+            return window.confirm("您输入的内容不是aaa，确认要离开吗？");
+        }
+    }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+        // 返回boolean类型  true 能进入/激活 路由
+        let name = route.queryParams["username"];
+        return name == "admin";
+    }
+
+}
+```
+
+2、配置DI(app.module.ts)
+
+```typescript
+  providers: [
+    Gard
+  ],
+```
+
+3、在路由中配置守卫
+
+```typescript
+  {path:"edit",component:EditComponent,
+    canActivate:[Gard],
+    canDeactivate:[Gard],
+    resolve:{
+      result:Gard
+    }
+  },
+```
+
+### 十八、项目的打包和发布
+
+#### 1、打包
+
+```powershell
+ng build
+```
+
+输出目录：项目/dist
+
+> 注意：配置一个provider
+
+```typescript
+ // 浏览器的定位策略
+ {provide:LocationStrategy,useClass:HashLocationStrategy}
+```
+
+
+
+#### 2、发布
+
+将打包生成的代码按照特定的web服务器规范放到特定位置
+
+
+
+> 注意: index.html 中的 <base href="/"> ！！！！
