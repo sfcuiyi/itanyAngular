@@ -10,20 +10,20 @@ export class MainComponent implements OnInit {
 
   public curDate :Date;
 
-  constructor(
-    private router:Router
-  ) { 
-    this.curDate = new Date();
-  }
+    constructor(
+      private router:Router
+    ) { 
+      this.curDate = new Date();
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  toDir()
-  {
-    // 参数是一个[]，数组中包含路径,和 routerLink的值一致
-    this.router.navigate(['/dir']);
-  }
+    toDir()
+    {
+      // 参数是一个[]，数组中包含路径,和 routerLink的值一致
+      this.router.navigate(['/dir']);
+    }
 
 
 }

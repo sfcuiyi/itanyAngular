@@ -1980,6 +1980,33 @@ export class AppRoutingModule { }
 
 
 
+#### 4、404的处理
+
+```typescript
+ //在路由的最后位置，可以配置带有通配符的映射关系
+  //路由的匹配规则是从上到下（从数组的第一个元素开始），依次匹配 ，直到找到第一个匹配的路由
+  {path:'**',component:NotfoundComponent}
+```
+
+#### 5、在ts中事件路由的跳转
+
+```typescript
+constructor(
+    private router:Router
+  ) { }
+
+
+  toDir()
+  {
+    // 参数是一个[]，数组中包含路径,和 routerLink的值一致
+    this.router.navigate(['/dir']);
+  }
+```
+
+```html
+<button (click)="toDir()">到指令</button>
+```
+
 
 
 
