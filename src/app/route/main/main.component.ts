@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -8,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   public curDate :Date;
-  
-  constructor() { 
+
+  constructor(
+    private router:Router
+  ) { 
     this.curDate = new Date();
   }
 
   ngOnInit() {
   }
+
+  toDir()
+  {
+    // 参数是一个[]，数组中包含路径,和 routerLink的值一致
+    this.router.navigate(['/dir']);
+  }
+
 
 }

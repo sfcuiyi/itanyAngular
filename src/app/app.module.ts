@@ -31,7 +31,8 @@ import { HttpComponent } from './http/http.component';
 import { RegistComponent } from './route/regist/regist.component';
 import { LoginComponent } from './route/login/login.component';
 import { MainComponent } from './route/main/main.component';
-import { AboutusComponent } from './route/aboutus/aboutus.component'
+import { AboutusComponent } from './route/aboutus/aboutus.component';
+import { NotfoundComponent } from './route/notfound/notfound.component'
 @NgModule({
     
   declarations: [
@@ -57,7 +58,8 @@ import { AboutusComponent } from './route/aboutus/aboutus.component'
     RegistComponent,
     LoginComponent,
     MainComponent,
-    AboutusComponent
+    AboutusComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
