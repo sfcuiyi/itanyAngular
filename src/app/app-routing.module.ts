@@ -10,8 +10,22 @@ import { DirComponent } from './dir/dir.component';
 const routes: Routes = [
   //url 和 组件的映射关系
   // path可以为空，空代表默认路径（首页）
-  {path:'',component:RegistComponent},
-  {path:'regist',component:RegistComponent},
+
+  
+  {path:'',redirectTo:'regist',pathMatch:'full'},
+  // {path:'',component:RegistComponent},
+  {path:'regist',component:RegistComponent},  
+  // 在url中一部分出现** ， 不代表通配符
+  {path:'regist/**',component:RegistComponent},
+  // redirectTo:重定向到
+  // /loginPage/log  ==> prefix ===> 匹配前缀 ===> 使用redirectTo的值替换前缀 ===> aaa/log
+  // /loginPage/log  ==> full ===> 完全匹配 ===> 'loginPage/log' ==> LoginComponent
+  //  注意：   1、路由的匹配策略pathMatch prefix代表匹配前缀（默认值）,full 完全匹配
+  //          2、'' 是所有的url的前缀
+  //              ====> 所有的url都匹配'' 
+  //              ====> "" 如果使用重定向路由，一定要提供pathMatch  并且值要是 full
+  {path:'loginPage',redirectTo:"aaa",pathMatch:"prefix"},
+  {path:'loginPage/log',component:LoginComponent},
   {path:'login',component:LoginComponent},
   {path:'about',component:AboutusComponent},
   {path:'about/:someName',component:AboutusComponent},

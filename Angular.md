@@ -2075,3 +2075,20 @@ AboutComponent
   {path:'about/:someName',component:AboutusComponent},
 ```
 
+#### 7、重定向路由
+
+当发送某个url，该url不指向 任何组件，指向另一个url
+
+```typescript
+ // 在url中一部分出现** ， 不代表通配符
+  {path:'regist/**',component:RegistComponent},
+  // redirectTo:重定向到
+  // /loginPage/log  ==> prefix ===> 匹配前缀 ===> 使用redirectTo的值替换前缀 ===> aaa/log
+  // /loginPage/log  ==> full ===> 完全匹配 ===> 'loginPage/log' ==> LoginComponent
+  //  注意：   1、路由的匹配策略pathMatch prefix代表匹配前缀（默认值）,full 完全匹配
+  //          2、'' 是所有的url的前缀
+  //              ====> 所有的url都匹配'' 
+  //              ====> "" 如果使用重定向路由，一定要提供pathMatch  并且值要是 full
+  {path:'loginPage',redirectTo:"aaa",pathMatch:"prefix"},
+```
+
