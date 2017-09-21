@@ -1894,8 +1894,91 @@ Angular使用路由机制，动态的修改页面中的dom，使得让用户看�
 | Routes         | 路由配置，保存url和组件之间的映射关系，以及在哪个RouterOutlet中展示组件 |
 | RouterOutlet   | 是HTML标签，表示路由内容呈现位置的  占位符指令               |
 | Router         | 在运行时执行路由的对象，可以调用其中的方法来导航到一个指定的路由         |
-| RouterLink     | 是HTML中声明路由导航的指令                          |
+| RouterLink     | 是HTML中声明路由导航的指令，大多数情况下 在a标签上使用           |
 | ActivitedRoute | 当前激活的路由对象，包括当前路由的信息，如地址，参数等等             |
+
+#### 3、路由的基本用法
+
+> 如果在创建项目的时候，指定了 --routing 参数，Angular会自动的完成第一步和第二部操作
+
+##### 3-1 导入路由模块
+
+app.module.ts
+
+```typescript
+ imports: [
+    //路由模块 导入的是第二步导出的类
+    AppRoutingModule,
+  ],
+```
+
+##### 3-2 创建app-routing.module.ts文件
+
+```typescript
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+```
+
+##### 3-3 配置映射关系
+
+```typescript
+const routes: Routes = [
+  //url 和 组件的映射关系
+  // path可以为空，空代表默认路径（首页）
+  {path:'',component:RegistComponent},
+  {path:'regist',component:RegistComponent},
+  {path:'login',component:LoginComponent},
+  {path:'about',component:AboutusComponent}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+##### 3-4 模板中使用路由
+
+```html
+<div class="container">
+
+
+  <div class="col-lg-2 col-lg-offset-1">
+    {{curDate}}
+      <ul>
+        <li>
+          <a routerLink="/regist" >注册</a>
+        </li>
+        <li>
+          <a routerLink="/login" >登录</a>
+        </li>
+        <li>
+          <a routerLink="/about" >关于我们</a>
+        </li>
+      </ul>
+
+  </div>
+
+  <div class="col-lg-8">
+    <router-outlet></router-outlet>
+  </div>
+
+
+</div>
+
+```
+
+
 
 
 

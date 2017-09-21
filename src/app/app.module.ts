@@ -27,7 +27,11 @@ import { MathplusService } from './services/mathplus.service';
 import { SomeServiceImplAService } from './services/someService/some-service-impl-a.service';
 import { SomeServiceImplBService } from './services/someService/some-service-impl-b.service';
 import {SomeService} from './services/someService/SomeService';
-import { HttpComponent } from './http/http.component'
+import { HttpComponent } from './http/http.component';
+import { RegistComponent } from './route/regist/regist.component';
+import { LoginComponent } from './route/login/login.component';
+import { MainComponent } from './route/main/main.component';
+import { AboutusComponent } from './route/aboutus/aboutus.component'
 @NgModule({
     
   declarations: [
@@ -49,10 +53,15 @@ import { HttpComponent } from './http/http.component'
     TemplateFormComponent,
     ReativeFormComponent,
     SomeComponent,
-    HttpComponent
+    HttpComponent,
+    RegistComponent,
+    LoginComponent,
+    MainComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
+    //路由模块
     AppRoutingModule,
     // 模板式表单
     FormsModule,
@@ -61,7 +70,7 @@ import { HttpComponent } from './http/http.component'
     // 对应Http服务的模块
     HttpModule,
     //处理跨域请求
-    JsonpModule
+    JsonpModule,
   ],
   // 配置provider
   // 写在providers中的类，可以通过构造方法注入给其他所有的组件或者service
