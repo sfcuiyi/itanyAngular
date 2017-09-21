@@ -2237,6 +2237,7 @@ export class Gard implements CanActivate,CanDeactivate<EditComponent>,Resolve<st
 
 ```powershell
 ng build
+ng build --base-href=/项目名/
 ```
 
 输出目录：项目/dist
