@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aboutus',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutusComponent implements OnInit {
 
-  constructor() { }
+  registUser:string;
+  otherName:string;
+  constructor(
+    private activitedRoute:ActivatedRoute
+  ) { 
+    this.registUser = this.activitedRoute.snapshot.queryParams["name"];
+    this.otherName = this.activitedRoute.snapshot.params["someName"];
+  }
 
   ngOnInit() {
   }

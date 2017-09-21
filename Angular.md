@@ -1895,7 +1895,7 @@ Angular使用路由机制，动态的修改页面中的dom，使得让用户看�
 | RouterOutlet   | 是HTML标签，表示路由内容呈现位置的  占位符指令               |
 | Router         | 在运行时执行路由的对象，可以调用其中的方法来导航到一个指定的路由         |
 | RouterLink     | 是HTML中声明路由导航的指令，大多数情况下 在a标签上使用           |
-| ActivitedRoute | 当前激活的路由对象，包括当前路由的信息，如地址，参数等等             |
+| ActivatedRoute | 当前激活的路由对象，包括当前路由的信息，如地址，参数等等             |
 
 #### 3、路由的基本用法
 
@@ -1978,8 +1978,6 @@ export class AppRoutingModule { }
 
 ```
 
-
-
 #### 4、404的处理
 
 ```typescript
@@ -2007,7 +2005,73 @@ constructor(
 <button (click)="toDir()">到指令</button>
 ```
 
+#### 6、参数的传递
 
+##### 6-1 传统get方式传参
 
+MainComponent
 
+```html
+<input type="text" [(ngModel)]="username" >
+<!-- /about?name=abc -->
+<a [routerLink]="'/about'" [queryParams]="{name:username}">传统get方式--到关于我们</a>
+```
+
+AboutComponent
+
+```typescript
+  registUser:string;
+  constructor(
+    private activitedRoute:ActivatedRoute
+  ) { 
+    this.registUser = this.activitedRoute.snapshot.queryParams["name"];
+  }
+```
+
+```html
+<p>注册的用户的用户名是：{{registUser}}</p>
+```
+
+##### 6-2 rest风格参数
+
+| get               | rest           |
+| ----------------- | -------------- |
+| /user/delete?id=1 | /user/delete/1 |
+
+请求参数作为url的一部分
+
+组件模板
+
+```html
+<input type="text" [(ngModel)]="username" >
+
+<!-- /about?name=abc -->
+<hr>
+<a [routerLink]="'/about'" [queryParams]="{name:username}">传统get方式--到关于我们</a>
+
+<hr>
+<a [routerLink]="'/about/zhangsan'">REST风格传递参数-y1-1</a>
+<a [routerLink]="'/about/username'">REST风格传递参数-y1-2</a>
+<a [routerLink]="'/about/' + username">REST风格传递参数-y1-2</a>
+<hr>
+<a [routerLink]="['/about','zhangsan']">REST风格传递参数-y2-1</a>
+<a [routerLink]="['/about',username]">REST风格传递参数-y2-2</a>
+```
+
+路由目标页
+
+```typescript
+  otherName:string;
+  constructor(
+    private activitedRoute:ActivatedRoute
+  ) { 
+    this.otherName = this.activitedRoute.snapshot.params["someName"];
+  }
+```
+
+路由配置
+
+```typescript
+  {path:'about/:someName',component:AboutusComponent},
+```
 

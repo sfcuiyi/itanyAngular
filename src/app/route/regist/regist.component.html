@@ -1,3 +1,13 @@
-<p>
-  regist works!
-</p>
+<input type="text" [(ngModel)]="username" >
+
+<!-- /about?name=abc -->
+<hr>
+<a [routerLink]="'/about'" [queryParams]="{name:username}">传统get方式--到关于我们</a>
+
+<hr>
+<a [routerLink]="'/about/zhangsan'">REST风格传递参数-y1-1</a>
+<a [routerLink]="'/about/username'">REST风格传递参数-y1-2</a>
+<a [routerLink]="'/about/' + username">REST风格传递参数-y1-2</a>
+<hr>
+<a [routerLink]="['/about','zhangsan']">REST风格传递参数-y2-1</a>
+<a [routerLink]="['/about',username]">REST风格传递参数-y2-2</a>

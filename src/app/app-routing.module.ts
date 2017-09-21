@@ -14,6 +14,7 @@ const routes: Routes = [
   {path:'regist',component:RegistComponent},
   {path:'login',component:LoginComponent},
   {path:'about',component:AboutusComponent},
+  {path:'about/:someName',component:AboutusComponent},
   {path:'databind',component:DatabindComponent},
   {path:'dir',component:DirComponent},
   //在路由的最后位置，可以配置带有通配符的映射关系
